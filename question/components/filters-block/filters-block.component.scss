@@ -1,0 +1,29 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// reusable
+.subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: map-get(vars.$weights, medium);
+  font-size: map-get(vars.$font-sizes, lg);
+  color: vars.$black;
+}
+
+// filters block
+.filters {
+  background-color: vars.$white;
+  box-shadow: vars.$box-shadow;
+  height: 661px;
+
+  &-header {
+    padding: 15px 20px;
+    height: 48px;
+    box-shadow: vars.$box-shadow;
+  }
+
+  &-body {
+    @include mixins.flex-column(stretch);
+    gap: 15px;
+    padding: 15px 20px;
+  }
+}

@@ -1,0 +1,150 @@
+<div class="new-question-modal" (click)="$event.stopPropagation()">
+  <div class="modal-header">
+    <h2 class="title">{{ data.isEdit ? 'Edit Question' : 'New Question' }}</h2>
+    <button class="close-btn icon-btn" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <form
+      [formGroup]="questionForm"
+      (ngSubmit)="onSubmit()"
+      (keydown.enter)="$event.preventDefault()">
+      <div class="form-field">
+        <label class="ta-label"
+          >Title
+          <span class="char-count">{{ getTitleCount() }}</span>
+          <span
+            *ngIf="questionForm.get('title')?.invalid && questionForm.get('title')?.touched"
+            class="error-message"
+            >{{ getErrorMessage('title') }}</span
+          >
+        </label>
+        <input
+          type="text"
+          formControlName="title"
+          class="ta-input"
+          placeholder="Type question title" />
+      </div>
+
+      <div class="form-field">
+        <label class="ta-label"
+          >Description
+          <span class="char-count">{{ getDescriptionCount() }}</span>
+          <span
+            *ngIf="
+              questionForm.get('description')?.invalid && questionForm.get('description')?.touched
+            "
+            class="error-message"
+            >{{ getErrorMessage('description') }}</span
+          >
+        </label>
+        <textarea
+          formControlName="description"
+          class="ta-textarea"
+          placeholder="Type text"
+          autoResize></textarea>
+      </div>
+
+      <div class="form-field">
+        <label class="ta-label"
+          >Topics
+          <span *ngIf="hasTopicError()" class="error-message">{{
+            getErrorMessage('topicIds')
+          }}</span>
+        </label>
+        <mat-form-field class="ta-topics-input">
+          <mat-chip-grid #chipGrid>
+            <mat-chip-row
+              *ngFor="let topic of selectedTopics()"
+              (removed)="removeTopic(getTopicId(topic))">
+              {{ topic.title }}
+              <button matChipRemove>
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-chip-row>
+            <input
+              placeholder="Type text"
+              #topicInput
+              class="ta-topic-input"
+              [formControl]="topicInputControl"
+              [matChipInputFor]="chipGrid"
+              [matAutocomplete]="auto"
+              [matChipInputSeparatorKeyCodes]="[13, 188]"
+              (matChipInputTokenEnd)="addNewTopic($event)"
+              (blur)="markControlAsTouched('topicIds')" />
+          </mat-chip-grid>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="onOptionSelected($event, topicInput)">
+            <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic.title">{{
+              topic.title
+            }}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label class="ta-label"
+          >Type
+          <span
+            *ngIf="questionForm.get('type')?.invalid && questionForm.get('type')?.touched"
+            class="error-message"
+            >{{ getErrorMessage('type') }}</span
+          >
+        </label>
+        <mat-form-field class="ta-select">
+          <mat-select
+            placeholder="Select question type"
+            formControlName="type"
+            (blur)="markControlAsTouched('type')">
+            <mat-option value="code">code</mat-option>
+            <mat-option value="text">text</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <label class="ta-label"
+          >Max length
+          <span
+            *ngIf="questionForm.get('time')?.invalid && questionForm.get('time')?.touched"
+            class="error-message"
+            >{{ getErrorMessage('time') }}</span
+          >
+        </label>
+        <div class="time">
+          <div class="time-presets">
+            <button type="button" (click)="addTime(15)"><span>+</span> 15 min</button>
+            <button type="button" (click)="addTime(30)"><span>+</span> 30 min</button>
+            <button type="button" (click)="addTime(60)"><span>+</span> 1 hour</button>
+            <button type="button" (click)="addTime(480)"><span>+</span> 8 hours</button>
+          </div>
+          <div class="time-input-group">
+            <input
+              type="text"
+              class="time-input"
+              formControlName="time"
+              placeholder="HH:MM"
+              (blur)="markControlAsTouched('time')" />
+            <div class="time-controls">
+              <button type="button" class="time-plus" (click)="addTime(1)">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button type="button" class="time-minus" (click)="addTime(-1)">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="modal-actions">
+      <button type="submit" ta-button [variant]="'flat'" [color]="'primary'" (click)="onSubmit()">
+        {{ data.isEdit ? 'Save' : 'Create' }}
+      </button>
+    </div>
+  </div>
+</div>

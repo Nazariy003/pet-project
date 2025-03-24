@@ -1,0 +1,193 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// reusable
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: map-get(vars.$weights, bold);
+  font-size: map-get(vars.$font-sizes, xl);
+  color: vars.$dark-grey;
+}
+
+.icon-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  mat-icon {
+    @include mixins.icon-size(24px);
+    color: #7f7f7f;
+  }
+}
+
+.modal-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 24px 24px 27px 40px;
+  background-color: vars.$light-gray;
+  border-bottom: 1px solid #eee;
+
+  h2 {
+    grid-row: 2;
+  }
+}
+
+.close-btn {
+  justify-self: end;
+  grid-column: 2;
+
+  mat-icon {
+    color: vars.$black;
+  }
+}
+
+// new-question modal
+.new-question-modal {
+  width: 100%;
+  max-width: 496px;
+  background-color: vars.$white;
+}
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 0px;
+}
+
+.modal-content {
+  padding: 20px 40px 40px;
+  background-color: vars.$white;
+  overflow-y: auto;
+  max-height: 80vh;
+
+  font-family: 'Open Sans', sans-serif;
+  font-weight: map-get(vars.$weights, light);
+  font-size: map-get(vars.$font-sizes, md);
+  color: vars.$black;
+}
+
+.form-field {
+  margin-top: 15px;
+
+  .ta-label {
+    position: relative;
+
+    span {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
+.ta-textarea {
+  min-height: 144px;
+}
+
+.time {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 21px;
+  height: 78px;
+
+  &-presets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+
+    button {
+      font-family: 'Open Sans', sans-serif;
+
+      padding: 6px 7px 7px;
+      text-align: left;
+      border: 2px solid vars.$silver-gray;
+      border-radius: vars.$border-radius;
+
+      font-weight: 600;
+      font-size: map-get(vars.$font-sizes, md);
+      color: vars.$black;
+
+      background-color: transparent;
+      cursor: pointer;
+
+      span {
+        font-weight: 600;
+        font-size: map-get(vars.$font-sizes, md);
+        color: vars.$pine-green;
+      }
+    }
+  }
+
+  &-input {
+    max-width: 156px;
+    font-size: 40px;
+  }
+
+  &-input-group {
+    display: flex;
+    border: 2px solid vars.$silver-gray;
+    border-radius: vars.$border-radius;
+
+    input {
+      border-radius: vars.$border-radius;
+      border: 2px solid vars.$silver-gray;
+
+      &[type='number']::-webkit-outer-spin-button,
+      &[type='number']::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type='number'] {
+        -moz-appearance: textfield;
+      }
+
+      &:focus {
+        border-color: vars.$silver-gray;
+        outline: none;
+      }
+    }
+  }
+
+  &-controls {
+    @include mixins.flex-column(stretch, space-between);
+
+    button {
+      @include mixins.flex-row(center, center);
+
+      width: 38px;
+      height: 38px;
+      border: 2px solid vars.$silver-gray;
+
+      background-color: transparent;
+      cursor: pointer;
+
+      mat-icon {
+        @include mixins.flex-row(center, center);
+
+        font-size: 18px;
+        color: vars.$pine-green;
+        font-weight: bold;
+      }
+    }
+
+    &-plus {
+      border-top-right-radius: 2px;
+    }
+
+    &-minus {
+      border-bottom-right-radius: 2px;
+    }
+  }
+}
+
+.modal-actions {
+  margin-top: 40px;
+  text-align: end;
+}
+
+.error-message {
+  font-weight: 600;
+  font-size: 10px;
+  text-align: right;
+  color: vars.$pink;
+}

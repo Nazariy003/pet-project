@@ -1,0 +1,23 @@
+<div class="questions">
+  <div class="questions-header">
+    <h3 class="subtitle">Questions ({{ questions().length }})</h3>
+    <div class="time-min">
+      <span>TIME, MIN</span>
+      <button class="icon-btn">
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="questions-body">
+    @if (questions().length > 0) {
+    <ul class="questions-list">
+      @for (question of questions(); track question.id) {
+      <ta-question-item [question]="question" />
+      }
+    </ul>
+    } @else {
+    <p class="no-questions">NO QUESTIONS YET</p>
+    }
+  </div>
+</div>

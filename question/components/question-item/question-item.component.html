@@ -1,0 +1,51 @@
+<li class="question" (click)="openViewModal(question())">
+  <div class="question-content">
+    <h4 class="question-title">
+      {{ question().title }}
+    </h4>
+    <div class="question-meta">
+      <div class="question-type">
+        @if (question().type === 'code') {
+        <img src="assets/icons/code.svg" alt="type-icon" />
+        } @else if (question().type === 'text') {
+        <img src="assets/icons/text.svg" alt="type-icon" />
+        }
+      </div>
+      <div class="question-topics">
+        @for (tag of question().topics; track tag) {
+        <span class="question-topic">{{ tag }}</span>
+        }
+      </div>
+    </div>
+    <p class="question-description">
+      {{
+        question().description.length > 200
+          ? (question().description | slice: 0 : 200) + '...'
+          : question().description
+      }}
+    </p>
+  </div>
+  <div class="question-actions">
+    <span class="time">{{ question().time }}</span>
+    <div class="question-buttons">
+      <button
+        class="icon-btn"
+        matTooltip="Edit"
+        #editTooltip="matTooltip"
+        #editButton
+        (mouseenter)="setTooltipPosition(editTooltip, editButton)"
+        (click)="openQuestionModal($event, question())">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        class="icon-btn"
+        matTooltip="Remove"
+        #removeTooltip="matTooltip"
+        #removeButton
+        (mouseenter)="setTooltipPosition(removeTooltip, removeButton)"
+        (click)="openRemoveModal($event, question())">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</li>

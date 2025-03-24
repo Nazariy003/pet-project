@@ -1,0 +1,52 @@
+<div class="filters">
+  <div class="filters-header">
+    <h3 class="subtitle">Filter settings</h3>
+  </div>
+  <div class="filters-body">
+    <div class="filters-field">
+      <label class="ta-label">Title</label>
+      <input class="ta-input" type="text" placeholder="Type question name" />
+    </div>
+
+    <div class="filters-field">
+      <label class="ta-label">Type</label>
+      <mat-form-field class="ta-select">
+        <mat-select placeholder="Select question type">
+          <mat-option value="all">all</mat-option>
+          <mat-option value="code">code</mat-option>
+          <mat-option value="text">text</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="filters-field">
+      <label class="ta-label">Topics</label>
+      <mat-form-field class="ta-topics-input">
+        <mat-chip-grid class="ta-topic-grid" #chipGrid>
+          @for (topic of selectedTopics(); track topic) {
+          <mat-chip-row class="ta-topic-chip" (removed)="removeTopic(topic)">
+            {{ topic }}
+            <button matChipRemove>
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+          <input
+            [matChipInputFor]="chipGrid"
+            [formControl]="topicInputControl"
+            [matAutocomplete]="auto"
+            #topicsInput
+            class="ta-topic-input"
+            placeholder="Type text" />
+        </mat-chip-grid>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onOptionSelected($event, topicsInput)">
+          @for (topic of filteredTopics | async; track $index) {
+          <mat-option class="ta-select-option" [value]="topic">{{ topic }}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

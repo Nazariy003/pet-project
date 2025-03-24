@@ -1,0 +1,72 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// Reusable
+.subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: map-get(vars.$weights, medium);
+  font-size: map-get(vars.$font-sizes, lg);
+  color: vars.$black;
+}
+
+.icon-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    color: #7f7f7f;
+  }
+}
+
+// questions block
+.questions {
+  background-color: vars.$white;
+  box-shadow: vars.$box-shadow;
+  height: 661px;
+
+  &-header {
+    @include mixins.flex-row(center, space-between);
+    padding: 8px 30px 8px 20px;
+    box-shadow: vars.$box-shadow;
+
+    .time-min {
+      @include mixins.flex-row(center);
+
+      span {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: map-get(vars.$weights, medium);
+        font-size: map-get(vars.$font-sizes, xs);
+        text-transform: uppercase;
+        text-align: right;
+        color: vars.$black;
+      }
+    }
+  }
+
+  &-body {
+    overflow-y: auto;
+    max-height: 613px;
+
+    // @include mixins.scrollable;
+  }
+}
+
+.no-questions {
+  margin-top: 60px;
+
+  font-family: 'Raleway', sans-serif;
+  font-weight: map-get(vars.$weights, bold);
+  font-size: map-get(vars.$font-sizes, md);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: vars.$pine-green;
+}

@@ -1,0 +1,39 @@
+<div class="question-modal">
+  <div class="modal-header">
+    <h2 class="title">Question</h2>
+    <button class="close-btn icon-btn" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="info-field">
+      <h4 class="info-title">Title</h4>
+      <p class="info-text">{{ question.title }}</p>
+    </div>
+
+    <div class="info-field">
+      <h4 class="info-title">Description</h4>
+      <p class="info-text">{{ question.description }}</p>
+    </div>
+
+    <div class="info-field">
+      <h4 class="info-title">Topics</h4>
+      <div class="topics">
+        @for (topic of question.topics; track topic) {
+        <span class="topic">{{ topic }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="info-field">
+      <h4 class="info-title">Type</h4>
+      <p class="info-text">{{ question.type }}</p>
+    </div>
+
+    <div class="info-field">
+      <h4 class="info-title">Max length</h4>
+      <p class="time">{{ question.time | minutesFormat }}</p>
+    </div>
+  </div>
+</div>

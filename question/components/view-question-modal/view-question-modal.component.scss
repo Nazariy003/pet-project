@@ -1,0 +1,100 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// reusable
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: map-get(vars.$weights, bold);
+  font-size: map-get(vars.$font-sizes, xl);
+  color: vars.$dark-grey;
+}
+
+.icon-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  mat-icon {
+    @include mixins.icon-size(24px);
+    color: #7f7f7f;
+  }
+}
+
+.modal-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 24px 24px 27px 40px;
+  background-color: vars.$light-gray;
+  border-bottom: 1px solid #eee;
+
+  h2 {
+    grid-row: 2;
+  }
+}
+
+.close-btn {
+  justify-self: end;
+  grid-column: 2;
+
+  mat-icon {
+    color: vars.$black;
+  }
+}
+
+// question modal
+.question-modal {
+  overflow-y: hidden;
+  background-color: vars.$white;
+}
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 0px;
+}
+
+.modal-content {
+  display: grid;
+  gap: 30px;
+  padding: 23px 40px 40px;
+
+  overflow-y: auto;
+  max-height: 80vh;
+
+  font-family: 'Open Sans', sans-serif;
+}
+
+.info-field {
+  .info-title {
+    margin-bottom: 12px;
+  }
+
+  .info-title,
+  .text {
+    font-weight: map-get(vars.$weights, light);
+    font-size: map-get(vars.$font-sizes, md);
+    color: vars.$black;
+  }
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.topic {
+  font-weight: map-get(vars.$weights, light);
+  font-size: map-get(vars.$font-sizes, md);
+  color: vars.$black;
+
+  padding: 6px 8px 7px;
+  background-color: #eee;
+  border-radius: vars.$border-radius;
+}
+
+.time {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  color: vars.$black;
+}

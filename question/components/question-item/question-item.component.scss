@@ -1,0 +1,161 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// Reusable
+.icon-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    font-size: 20px;
+    color: #7f7f7f;
+  }
+}
+
+// question item
+.question {
+  @include mixins.flex-row(stretch, space-between);
+  gap: 20px;
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+  border-right: 1px solid #eee;
+  transition: background-color 0.3s ease;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e6f2f1;
+
+    .question-buttons {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &-content {
+    @include mixins.flex-column(stretch);
+    gap: 8px;
+  }
+
+  &-title {
+    font-weight: 600;
+    font-size: map-get(vars.$font-sizes, sm);
+    line-height: 138.461538%; /* 18/13 */
+    color: vars.$black;
+  }
+
+  &-meta {
+    display: flex;
+    gap: 4px;
+  }
+
+  &-type {
+    width: 16px;
+    height: 16px;
+  }
+
+  &-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &-topic {
+    font-weight: map-get(vars.$weights, light);
+    font-size: map-get(vars.$font-sizes, xs);
+    color: vars.$black;
+
+    padding: 1px 3px;
+    background-color: #eee;
+    border-radius: vars.$border-radius;
+  }
+
+  &-description {
+    font-weight: map-get(vars.$weights, light);
+    font-size: map-get(vars.$font-sizes, sm);
+    line-height: 138.461538%; /* 18/13 */
+    color: #101820;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-actions {
+    @include mixins.flex-column(center);
+    gap: 8px;
+
+    .time {
+      font-weight: map-get(vars.$weights, medium);
+      font-size: map-get(vars.$font-sizes, xs);
+      text-transform: uppercase;
+      text-align: right;
+      color: #101820;
+    }
+  }
+
+  &-buttons {
+    @include mixins.flex-column(center);
+
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    mat-icon {
+      color: vars.$black;
+    }
+  }
+}
+
+::ng-deep .action-tooltip {
+  position: relative;
+  pointer-events: none;
+  padding: 8px;
+  background-color: #222;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #fff;
+
+  &::ng-deep .mat-mdc-tooltip-surface {
+    background-color: #222;
+    color: white;
+  }
+
+  &:after {
+    width: 0;
+    height: 0;
+    content: '';
+    position: absolute;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid #222;
+  }
+
+  &.tooltip-above:after {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 0.4rem solid #222;
+    border-bottom: none;
+  }
+
+  &.tooltip-below:after {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 0.4rem solid #222;
+    border-top: none;
+  }
+}

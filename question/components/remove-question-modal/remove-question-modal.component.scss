@@ -1,0 +1,73 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// reusable
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: vars.$dark-grey;
+}
+
+.icon-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  mat-icon {
+    @include mixins.icon-size(24px);
+    color: #7f7f7f;
+  }
+}
+
+.modal-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 24px 24px 27px 40px;
+  background-color: vars.$light-gray;
+  border-bottom: 1px solid #eee;
+
+  h2 {
+    grid-row: 2;
+  }
+}
+
+.close-btn {
+  justify-self: end;
+  grid-column: 2;
+
+  mat-icon {
+    color: vars.$black;
+  }
+}
+
+// remove question modal
+.remove-modal {
+  width: 100%;
+  max-width: 496px;
+  background-color: vars.$white;
+}
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 0px;
+}
+
+.modal-content {
+  padding: 20px 40px 40px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.confirmation-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 157%;
+  color: #022221;
+  margin-bottom: 40px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+}

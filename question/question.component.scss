@@ -1,0 +1,31 @@
+@use 'src/styles/variables' as vars;
+@use 'src/styles/mixins' as mixins;
+
+// reusable
+.title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: map-get(vars.$weights, bold);
+  font-size: map-get(vars.$font-sizes, xl);
+  color: vars.$dark-grey;
+}
+
+.wrapper {
+  max-width: 1140px;
+  padding: auto;
+  margin: 0 auto;
+}
+
+// library block
+.library {
+  &-header {
+    @include mixins.flex-row(center, space-between);
+    padding: 20px 4px 20px 20px;
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: vars.$container-gap;
+    font-family: 'Open Sans', sans-serif;
+  }
+}

@@ -1,0 +1,20 @@
+<div class="remove-modal">
+  <div class="modal-header">
+    <h2 class="title">Remove question</h2>
+    <button class="close-btn icon-btn" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <p class="confirmation-text">
+      Remove
+      <strong>"{{ question.title }}"</strong>?
+    </p>
+
+    <div class="modal-actions">
+      <button ta-button variant="outline" color="primary" (click)="close()">CANCEL</button>
+      <button ta-button variant="flat" color="warning">REMOVE</button>
+    </div>
+  </div>
+</div>
