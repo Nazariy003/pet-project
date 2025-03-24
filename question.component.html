@@ -1,0 +1,20 @@
+<section class="library">
+  <div class="library-header">
+    <h2 class="title">Library questions</h2>
+    <button ta-button [variant]="'flat'" [color]="'primary'" (click)="openCreateModal()">
+      Create New
+    </button>
+  </div>
+
+  <div class="library-content">
+    <ta-filters-block [availableTopics]="availableTopics()"></ta-filters-block>
+    <ta-questions-block [questions]="questions()"></ta-questions-block>
+  </div>
+</section>
+
+<!-- @if (isModalOpen()) {
+<app-create-question-modal
+  (closeModal)="handleCloseModal()"
+  (questionCreated)="handleQuestionCreated($event)">
+</app-create-question-modal>
+} -->
